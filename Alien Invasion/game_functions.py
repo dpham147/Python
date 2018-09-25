@@ -218,9 +218,9 @@ def create_alien(ai_settings, screen, aliens, alien_number, row_number):
     # Create an alien and place it in the row
     alien = Alien(ai_settings, screen)
     alien_width = alien.rect.width
-    alien.x = alien_width + 2 * alien_width * alien_number
+    alien.x = alien_width + 1.25 * alien_width * alien_number
     alien.rect.x = alien.x
-    alien.rect.y = alien.rect.height + 2 * alien.rect.height * row_number
+    alien.rect.y = alien.rect.height + 1.25 * alien.rect.height * row_number
     aliens.add(alien)
 
 
