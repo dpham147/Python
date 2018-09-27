@@ -1,9 +1,6 @@
 import sys
 from time import sleep
 import pygame
-from paddle import Paddle
-from ball import Ball
-from cpu_agent import Computer
 
 
 def check_keydown_events(event, paddle, stats):
@@ -47,26 +44,29 @@ def check_collision(settings, ball, paddle):
     # Check collision with left and right paddles
     if circle.colliderect(paddle.rect1) or circle.colliderect(paddle.rect2) or \
             circle.colliderect(paddle.cpu1) or circle.colliderect(paddle.cpu2):
-            ball.x_velocity *= settings.ball_speedup
-            ball.y_velocity *= -settings.ball_speedup
+            ball.x_velocity *= 1
+            ball.y_velocity *= -1
+            adjust_speed(settings, ball)
     # Check if collides with bottom paddle
     if ball.circle.colliderect(paddle.rect3) or circle.colliderect(paddle.cpu3):
-        ball.y_velocity *= settings.ball_speedup
-        ball.x_velocity *= -settings.ball_speedup
-
-    adjust_speed(settings, ball)
-
-
-def adjust_speed(settings, ball): #TODO: Allow autoadjustment of ball speed should it come close to cardinal
-    eggs = 0
+        ball.y_velocity *= 1
+        ball.x_velocity *= -1
+        adjust_speed(settings, ball)
 
 
-def check_out_of_bounds(settings, screen, ball, game_stats, scoreboard):
+def adjust_speed(settings, ball):
+    ball.x_velocity = min(ball.x_velocity * settings.ball_speedup,
+                          settings.abs_max_vel)
+    ball.y_velocity = min(ball.y_velocity * settings.ball_speedup,
+                          settings.abs_max_vel)
+
+
+def check_out_of_bounds(settings, screen, ball, paddle, game_stats, scoreboard):
     screen_rect = screen.get_rect()
-    if ball.circle.left <= 0 or \
-            ball.circle.top <= 0 or \
-            ball.circle.right >= screen_rect.right or \
-            ball.circle.bottom >= screen_rect.bottom:
+    if ball.circle.right < 0 or \
+            ball.circle.bottom < 0 or \
+            ball.circle.left > screen_rect.right or \
+            ball.circle.top > screen_rect.bottom:
         ball.reset()
         settings.init_dynamic_settings()
 
@@ -75,8 +75,8 @@ def check_out_of_bounds(settings, screen, ball, game_stats, scoreboard):
         elif ball.circle.centerx >= screen_rect.centerx:
             game_stats.player_score += 1
         scoreboard.prep_scores()
-
-        sleep(0.5)
+        paddle.reset()
+        sleep(1)
 
 
 def display_start_screen(settings, screen):
@@ -86,8 +86,9 @@ def display_start_screen(settings, screen):
     # Recolor screen
     screen.fill(settings.bg_color)
     title_str = "PONG"
+    input_str = "PRESS SPACE TO START"
     text_color = (255, 255, 255)
-    font = pygame.font.SysFont(None, 48)
+    font = pygame.font.SysFont(None, settings.title_font)
 
     title_image = font.render(title_str, True, text_color, settings.bg_color)
 
@@ -95,18 +96,30 @@ def display_start_screen(settings, screen):
     title_image_rect.centerx = screen_rect.centerx
     title_image_rect.centery = screen_rect.centery - 40
 
+    screen.blit(title_image, title_image_rect)
+
     pygame.display.flip()
+
+
+def draw_divider(screen, settings):
+    screen_rect = screen.get_rect()
+    divider = pygame.Rect(0, 0, settings.divider_width, settings.divider_height)
+    divider.centerx = screen_rect.centerx
+    pygame.draw.rect(screen, settings.divider_color, divider)
 
 
 def update_screen(settings, screen, ball, paddle, scoreboard, game_stats):
     # Recolor the screen
     screen.fill(settings.bg_color)
 
+    # Draw center divider
+    draw_divider(screen, settings)
+
     # Check for collisions
     check_collision(settings, ball, paddle)
 
     # Check for boundaries
-    check_out_of_bounds(settings, screen, ball, game_stats, scoreboard)
+    check_out_of_bounds(settings, screen, ball, paddle, game_stats, scoreboard)
 
     # Redraw the ball
     ball.draw_ball()

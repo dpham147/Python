@@ -1,5 +1,4 @@
 import pygame
-from pygame.sprite import Group
 from paddle import Paddle
 from ball import Ball
 from game_settings import Settings
