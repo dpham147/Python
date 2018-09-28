@@ -88,15 +88,22 @@ def display_start_screen(settings, screen):
     title_str = "PONG"
     input_str = "PRESS SPACE TO START"
     text_color = (255, 255, 255)
-    font = pygame.font.SysFont(None, settings.title_font)
+    title_font = pygame.font.SysFont(None, settings.title_font_size)
+    text_font = pygame.font.SysFont(None, settings.text_font_size)
 
-    title_image = font.render(title_str, True, text_color, settings.bg_color)
+    title_image = title_font.render(title_str, True, text_color, settings.bg_color)
+    text_image = text_font.render(input_str, True, text_color, settings.bg_color)
 
     title_image_rect = title_image.get_rect()
     title_image_rect.centerx = screen_rect.centerx
     title_image_rect.centery = screen_rect.centery - 40
 
+    text_image_rect = text_image.get_rect()
+    text_image_rect.centerx = screen_rect.centerx
+    text_image_rect.centery = screen_rect.centery + 100
+
     screen.blit(title_image, title_image_rect)
+    screen.blit(text_image, text_image_rect)
 
     pygame.display.flip()
 

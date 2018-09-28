@@ -10,11 +10,11 @@ class Settings():
         # Screen
         display = pygame.display.Info()
         self.screen_width = 1200
-        self.screen_height = 500
+        self.screen_height = 800
         self.bg_color = (0, 0, 0)
 
         # Font sizes
-        self.title_font = 48
+        self.title_font_size = 48
         self.text_font_size = 36
 
         # Ball settings
