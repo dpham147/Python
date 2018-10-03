@@ -15,7 +15,10 @@ def check_keydown_events(event, paddle, stats):
     elif event.key == pygame.K_d or event.key == pygame.K_RIGHT:
         paddle.moving_right = True
     elif event.key == pygame.K_SPACE:
-        stats.game_active = True
+        if stats.game_active == False:
+            stats.game_active = True
+            stats.reset_stats()
+
 
 
 def check_keyup_events(event, paddle):
@@ -74,12 +77,16 @@ def check_out_of_bounds(settings, screen, ball, paddle, game_stats, scoreboard):
             game_stats.cpu_score += 1
         elif ball.circle.centerx >= screen_rect.centerx:
             game_stats.player_score += 1
-        scoreboard.prep_scores()
+
         paddle.reset()
-        sleep(1)
+        sleep(2)
+    scoreboard.prep_scores()
+
+    if game_stats.cpu_score >= settings.score_target or game_stats.player_score >= settings.score_target:
+        game_stats.game_active = False
 
 
-def display_start_screen(settings, screen):
+def display_start_screen(settings, screen, stats):
 
     screen_rect = screen.get_rect()
 
@@ -87,7 +94,7 @@ def display_start_screen(settings, screen):
     screen.fill(settings.bg_color)
     title_str = "PONG"
     input_str = "PRESS SPACE TO START"
-    text_color = (255, 255, 255)
+    text_color = settings.font_color
     title_font = pygame.font.SysFont(None, settings.title_font_size)
     text_font = pygame.font.SysFont(None, settings.text_font_size)
 
@@ -105,6 +112,9 @@ def display_start_screen(settings, screen):
     screen.blit(title_image, title_image_rect)
     screen.blit(text_image, text_image_rect)
 
+    # Displays winner if any
+    display_winner(screen, settings, stats)
+
     pygame.display.flip()
 
 
@@ -113,6 +123,36 @@ def draw_divider(screen, settings):
     divider = pygame.Rect(0, 0, settings.divider_width, settings.divider_height)
     divider.centerx = screen_rect.centerx
     pygame.draw.rect(screen, settings.divider_color, divider)
+
+
+def display_winner(screen, settings, stats):
+    if stats.player_score == settings.score_target:
+        screen_rect = screen.get_rect()
+
+        winner_text = "YOU WIN!!!"
+        text_color = settings.font_color
+        font = pygame.font.SysFont(None, settings.title_font_size)
+        text_image = font.render(winner_text, True, text_color, settings.bg_color)
+        winner_image_rect = text_image.get_rect()
+        winner_image_rect.centerx = screen_rect.centerx
+        winner_image_rect.top = screen_rect.top + 20
+        stats.game_active = False
+
+        screen.blit(text_image, winner_image_rect)
+
+    if stats.cpu_score == settings.score_target:
+        screen_rect = screen.get_rect()
+
+        winner_text = "CPU WINS!!!"
+        text_color = settings.font_color
+        font = pygame.font.SysFont(None, settings.title_font_size)
+        text_image = font.render(winner_text, True, text_color, settings.bg_color)
+        winner_image_rect = text_image.get_rect()
+        winner_image_rect.centerx = screen_rect.centerx
+        winner_image_rect.top = screen_rect.top + 20
+        stats.game_active = False
+
+        screen.blit(text_image, winner_image_rect)
 
 
 def update_screen(settings, screen, ball, paddle, scoreboard, game_stats):

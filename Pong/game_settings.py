@@ -13,7 +13,8 @@ class Settings():
         self.screen_height = 800
         self.bg_color = (0, 0, 0)
 
-        # Font sizes
+        # Font settings
+        self.font_color = (255, 255, 255)
         self.title_font_size = 48
         self.text_font_size = 36
 
@@ -42,13 +43,21 @@ class Settings():
         self.divider_height = self.screen_height
 
         # Scoring settings
-        self.score_target = 5
+        self.score_target = 2
 
         self.init_dynamic_settings()
 
     def init_dynamic_settings(self):
         ran_dir_x = random.uniform(-1, 1)
+        if ran_dir_x < 0:
+            dir_x = -1
+        else:
+            dir_x = 1
         ran_dir_y = random.uniform(-1, 1)
+        if ran_dir_y < 0:
+            dir_y = -1
+        else:
+            dir_y = 1
         magnitude_x = random.uniform(self.min_velocity, self.max_velocity)
         magnitude_y = random.uniform(self.min_velocity, self.max_velocity)
-        self.x_velocity, self.y_velocity = ran_dir_x * magnitude_x, ran_dir_y * magnitude_y
+        self.x_velocity, self.y_velocity = dir_x * magnitude_x, dir_y * magnitude_y

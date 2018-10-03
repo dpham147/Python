@@ -35,7 +35,6 @@ class Ball(Sprite):
         self.pos = self.circle.center
 
     def draw_ball(self):
-        #pygame.draw.Rect(self.screen, self.color, self.circle)
         pygame.draw.circle(self.screen, self.color, self.pos, self.settings.ball_radius)
 
     def reset(self):

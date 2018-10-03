@@ -36,7 +36,7 @@ def run_game():
             cpu.update(ball, paddle)
             gf.update_screen(settings, screen, ball, paddle, scoreboard, stats)
         else:
-            gf.display_start_screen(settings, screen)
+            gf.display_start_screen(settings, screen, stats)
 
 
 run_game()
