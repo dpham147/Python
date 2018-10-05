@@ -14,7 +14,7 @@ def check_keydown_events(event, ai_settings, screen, ship, bullets):
         ship.moving_left = True
     elif event.key == pygame.K_SPACE:
         fire_bullet(ai_settings, screen, ship, bullets)
-    elif event.key == pygame.K_q:
+    elif event.key == pygame.K_q or event.key == pygame.K_ESCAPE:
         sys.exit()
 
 
@@ -81,7 +81,7 @@ def check_play_button(ai_settings, screen, stats, sb, play_button, ship, aliens,
 def update_screen(ai_settings, screen, stats, sb, ship, aliens, bullets, play_button):
     """Update images on the screen and flip to the new screen."""
     # Redraw the screen during each pass through the loop.
-    screen.fill(ai_settings.bg_color)
+    screen.fill(ai_settings.game_bg_color)
 
     # Redraw all bullets behind ship and aliens.
     for bullet in bullets.sprites():
@@ -244,3 +244,17 @@ def check_high_score(stats, sb):
         stats.high_score = stats.player_score
         sb.prep_high_score()
 
+
+def rank_score(stats):
+    """Open a reference to scoresheet"""
+    score_file = open("highscores.txt")
+    score_list = []
+    for line in score_file:
+        score_list.append(line)
+
+    score_list.sort()
+
+    for score in score_list:
+        print(score)
+
+    score_file.close()
