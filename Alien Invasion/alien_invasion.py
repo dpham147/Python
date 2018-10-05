@@ -41,7 +41,12 @@ def run_game():
             gf.update_bullets(ai_settings, screen, stats, sb, ship, aliens, bullets)
             gf.update_aliens(ai_settings, stats, screen, sb, ship, aliens, bullets)
 
-        gf.update_screen(ai_settings, screen, stats, sb, ship, aliens, bullets, play_button)
+        if ai_settings.show_game:
+            gf.update_screen(ai_settings, screen, stats, sb, ship, aliens, bullets)
+        elif ai_settings.show_menu:
+            gf.display_menu(ai_settings, screen)
+        elif ai_settings.show_high_scores:
+            gf.display_high_scores(ai_settings, screen)
 
 
 run_game()

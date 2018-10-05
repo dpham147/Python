@@ -9,6 +9,14 @@ class Settings():
         self.menu_bg_color = (0, 0, 0)
         self.game_bg_color = (0, 0, 255)
         self.font_color = (255, 255, 255)
+        self.title_font_size = 100
+        self.sub_title_font_size = 80
+        self.menu_font_size = 48
+
+        # View mode
+        self.show_menu = True
+        self.show_high_scores = False
+        self.show_game = False
 
         # Ship settings
         self.ship_limit = 0
