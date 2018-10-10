@@ -1,10 +1,9 @@
 import pygame
-from settings import Settings
-import game_functions as gf
+from game import Game as pacman
 
 
 def run_game():
-    pygame.init()
+    pacman.play()
 
 
 run_game()
