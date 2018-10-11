@@ -11,6 +11,9 @@ class EventLoop:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_q:
+                    sys.exit()
 
     '''def check_events(screen, pacman, ghosts):
         if event.key in EventLoop.map.keys():

@@ -2,6 +2,7 @@ import pygame
 from maze import Maze
 from eventloop import EventLoop
 
+
 class Game:
     BLACK = (0, 0, 0)
 
@@ -10,8 +11,8 @@ class Game:
         self.screen = pygame.display.set_mode((680, 740))
         pygame.display.set_caption("Pacman Portal")
 
-        self.maze = Maze(self.screen, mazefile='images/packmanportalmaze.txt',
-                         brickfile='square', portalfile='portal',
+        self.maze = Maze(self.screen, mazefile='images/pacmanportalmaze.txt',
+                         brickfile='map_block', portalfile='portal',
                          shieldfile='shield', pointfile='point')
 
     def play(self):
@@ -20,5 +21,11 @@ class Game:
             eloop.check_events()
             self.update_screen()
 
-   def update_screen(self):
-       self.screen.fill(self.BLACK)
+    def update_screen(self):
+        self.screen.fill(Game.BLACK)
+        self.maze.blitme()
+        pygame.display.flip()
+
+
+game = Game()
+game.play()
