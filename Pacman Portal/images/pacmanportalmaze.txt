@@ -3,7 +3,7 @@ X.....................XX.....................X
 X.ppppppppppppppppppp.XX.ppppppppppppppppppp.h
 X.p.......p.........p.XX.p.........p.......p.X
 X.p.XXXXX.p.XXXXXXX.p.XX.p.XXXXXXX.p.XXXXX.p.X
-X.p.XXXXX.p.XXXXXXX.p.XX.p.XXXXXXX.p.XXXXX.p.X
+X.P.XXXXX.p.XXXXXXX.p.XX.p.XXXXXXX.p.XXXXX.P.X
 X.p.XXXXX.p.XXXXXXX.p.XX.p.XXXXXXX.p.XXXXX.p.X
 X.p.......p.........p....p.........p.......p.X
 X.pppppppppppppppppppppppppppppppppppppppppp.X
@@ -36,7 +36,7 @@ X.p.......p.........p.XX.p.........p.......p.X
 X.p.XXXXX.p.XXXXXXX.p.XX.p.XXXXXXX.p.XXXXX.p.X
 X.p.XXXXX.p.XXXXXXX.p.XX.p.XXXXXXX.p.XXXXX.p.X
 X.p....XX.p.........p....p.........p.XX....p.X
-X.pppp.XX.pppppppppppppppppppppppppp.XX.pppp.X
+X.Pppp.XX.ppppppppppppS.pppppppppppp.XX.pppP.X
 X....p.XX.p....p..............p....p.XX.p....X
 XXXX.p.XX.p.XX.p.XXXXXXXXXXXX.p.XX.p.XX.p.XXXX
 XXXX.p.XX.p.XX.p.XXXXXXXXXXXX.p.XX.p.XX.p.XXXX
@@ -45,6 +45,6 @@ X.ppppppppp.XX.pppppp.XX.pppppp.XX.ppppppppp.X
 X.p.........XX......p.XX.p......XX.........p.X
 X.p.XXXXXXXXXXXXXXX.p.XX.p.XXXXXXXXXXXXXXX.p.X
 X.p.................p....p.................p.X
-X.pppppppppppppppppppppppppppppppppppppppppp.X
+X.ppppppppppppppppppppppppppppppppppppppppp.X
 X............................................X
 XXXXXXXXXvXXXXXXXXXXXXXXvXXXXXXXXXXXXXXXXXXXXX

@@ -1,3 +1,7 @@
+import pygame.sprite
+from timer import Timer
+
+
 class Pacman:
 
     def __init__(self):
