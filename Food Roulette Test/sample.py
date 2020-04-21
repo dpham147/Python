@@ -31,7 +31,7 @@ try:
     from urllib.parse import urlencode
 except ImportError:
     # Fall back to Python 2's urllib2 and urllib
-    from urllib2 import HTTPError
+    from urllib import HTTPError
     from urllib import quote
     from urllib import urlencode
 
